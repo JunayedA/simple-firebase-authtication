@@ -1,4 +1,4 @@
-import { signInWithPopup,getAuth,GoogleAuthProvider, GithubAuthProvider} from 'firebase/auth';
+import { signInWithPopup,getAuth,GoogleAuthProvider, GithubAuthProvider, signOut} from 'firebase/auth';
 import { useState } from 'react';
 import './App.css';
 import initializeAuthentication from './Firebase/firebase.initialize';
@@ -42,11 +42,26 @@ function App() {
       setUser(loggedInUser);
     })
   }
+
+  const handleSignOut = () =>{
+    signOut(auth)
+    .then(() => {
+      setUser({});
+    })
+  }
   return (
     <div className="App">
-      <button onClick={handleGoogleSignIn}>Google Sign in</button>
-      <br />
-      <button onClick={hadndleGithubSignIn}>Github sign in</button>
+
+      {!user.name ?
+        <div>
+        <button onClick={handleGoogleSignIn}>Google Sign in</button>
+        <br />
+        <button onClick={hadndleGithubSignIn}>Github sign in</button>
+      </div>:
+      <div>
+        <br />
+        <button onClick={handleSignOut}>Sign out</button>
+      </div>}
       <br />
       {
         user.name && <div>
