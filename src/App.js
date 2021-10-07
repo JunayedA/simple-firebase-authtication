@@ -2,6 +2,7 @@ import { signInWithPopup,getAuth,GoogleAuthProvider, GithubAuthProvider, signOut
 import { useState } from 'react';
 import './App.css';
 import initializeAuthentication from './Firebase/firebase.initialize';
+import { Button } from 'react-bootstrap';
 
 initializeAuthentication();
 
@@ -54,13 +55,13 @@ function App() {
 
       {!user.name ?
         <div>
-        <button onClick={handleGoogleSignIn}>Google Sign in</button>
+        <Button variant="primary m-5" onClick={handleGoogleSignIn}>Google Sign in</Button>
         <br />
-        <button onClick={hadndleGithubSignIn}>Github sign in</button>
+        <Button onClick={hadndleGithubSignIn}>Github sign in</Button>
       </div>:
       <div>
         <br />
-        <button onClick={handleSignOut}>Sign out</button>
+        <Button onClick={handleSignOut}>Sign out</Button>
       </div>}
       <br />
       {
